@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Why Clojure?</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Why Clojure?"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-01-03 17:31:44 IST"/>
+<meta name="author" content="Daniel Szmulewicz"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style><!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/railscast/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div class="layout">
+<div id="controls"><!-- no edit --></div>
+<div id="currentSlide"><!-- no edit --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Daniel Szmulewicz - Why Clojure?</h1>
+</div>
+</div>
+
+<div class="presentation">
+<div class="slide">
+<h1>Why Clojure?</h1>
+<h1>Daniel Szmulewicz</h1>
+<h1>2013-01-03</h1>
+</div>
+<h1 class="title">Why Clojure?</h1>
+
+
+
+
+<div id="outline-container-1" class="outline-1 slide">
+<h1 id="sec-1">What this talk is (not) about</h1>
+<div class="outline-text-1" id="text-1">
+
+
+<p>
+Drawing a landscape of concepts to help understand what Clojure is. It is not an in-depth examination of those concepts in themselves.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-1 slide">
+<h1 id="sec-2">The meaning of computing</h1>
+<div class="outline-text-1" id="text-2">
+
+
+<p>
+What does it mean to compute? People have struggled with this question for a long time.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-1 slide">
+<h1 id="sec-3">Brain versus machine</h1>
+<div class="outline-text-1" id="text-3">
+
+
+<ul>
+<li>We have a terribly poor understanding of the computation that goes on in the brain. We are completely unable to simulate it, and we cannot even recognize what the general form of this computation is, despite decades of experimental data from neurobiologists.
+
+</li>
+<li>We have a slightly better understanding of the kinds of computation we can do with machines. 
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-1 slide">
+<h1 id="sec-4">What do we know about computing with machines?</h1>
+<div class="outline-text-1" id="text-4">
+
+
+<p>
+Our knowledge falls in two categories: 
+</p>
+<ul>
+<li>The practice of computing: How to build software, how to teach programming, how to enhance programmer's productivity.
+
+</li>
+<li>The theory of computing: What it is. How to formalize it in a notation. 
+</li>
+</ul>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-1 slide">
+<h1 id="sec-5">Models Of Computation</h1>
+<div class="outline-text-1" id="text-5">
+
+
+<p>
+Over time, many models of computation have been invented. These models guide our thinking about what it means to compute.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-1 slide">
+<h1 id="sec-6">Examples</h1>
+<div class="outline-text-1" id="text-6">
+
+
+<p>
+Turing Machines, Cellular Automata, Finite State Machines, Stack Machines, Graph Automata, Lambda Calculus, Fractran, Tiling Systems, Chemical Reaction Systems, Hopfield Networks, Boltzmann Machines, Neural Networks, Circuits, Graphical Models, Boolean Algebra, String Rewriting Systems, Semigroups, Quantum Waves, Diophantine Equations, Tag Systems, The Actor Model, etc.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-1 slide">
+<h1 id="sec-7">Computation models and programming</h1>
+<div class="outline-text-1" id="text-7">
+
+
+<ul>
+<li>Models of computation are extremely useful to inventors/designer of high-level programming languages.
+</li>
+<li>Some models of computations are more succesful than others. 
+</li>
+</ul>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-1 slide">
+<h1 id="sec-8">Lambda Calculus</h1>
+<div class="outline-text-1" id="text-8">
+
+
+<p>
+Alonzo Church developed a notation for arbitrary functions. His notation is called λ-calculus (“lambda calculus”). Church introduced his
+formalism to give a functional foundation for Mathematics but in the end mathematicians preferred (axiomatic) set theory. The λ-calculus was re-discovered as a versatile tool in Computer Science by people like McCarthy, Strachey, Landin, and Scott in the 1960s.
+</p>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-1 slide">
+<h1 id="sec-9">What did McCarthy discover?</h1>
+<div class="outline-text-1" id="text-9">
+
+
+<p>
+If you try to answer the question, what is the smallest number of operators you need in order to write an interpreter for a language in itself, Lisp is what you get. In other words, Lisp is not something John McCarthy invented, so much as something he discovered.
+</p>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-1 slide">
+<h1 id="sec-10">Seven operators</h1>
+<div class="outline-text-1" id="text-10">
+
+
+<p>
+If you have seven primitive operators <code>(quote, atom, eq, car, cdr, cons, and cond)</code> then you can define another function, <code>eval</code>, that acts as a Lisp interpreter.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-11" class="outline-1 slide">
+<h1 id="sec-11">S-expressions</h1>
+<div class="outline-text-1" id="text-11">
+
+
+<p>
+<code>(1 2 3)</code>
+</p>
+<p>
+With S-expressions, code and data share the same representation. 
+</p>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-12" class="outline-1 slide">
+<h1 id="sec-12">Parentheses</h1>
+<div class="outline-text-1" id="text-12">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #5f8700;">defun</span> <span style="color: #0087ff;">factorial</span> (x)
+   (<span style="color: #5f8700;">if</span> (zerop x)
+       1
+       (* x (factorial (- x 1)))))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-13" class="outline-1 slide">
+<h1 id="sec-13">An accident of history</h1>
+<div class="outline-text-1" id="text-13">
+
+
+<p>
+"The project of defining M-expressions precisely and compiling them or at least translating them into S-expressions was neither finalized nor explicitly abandoned. It just receded into the indefinite future, and a new generation of programmers appeared who preferred internal notation to any FORTRAN-like or ALGOL-like notation that could be devised." — John McCarthy, History of Lisp
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-14" class="outline-1 slide">
+<h1 id="sec-14">Lisp takes off</h1>
+<div class="outline-text-1" id="text-14">
+
+
+<p>
+LISP became a common language for artificial intelligence (AI) programming, partly owing to the confluence of LISP and AI work at MIT and partly because AI programs capable of "learning" could be written in LISP as self-modifying programs. Since then, it has expanded in a family of dialects, regularly reincarnating in new shape and form but always retaining the same core semantics.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-15" class="outline-1 slide">
+<h1 id="sec-15">Clojure is a Lisp</h1>
+<div class="outline-text-1" id="text-15">
+
+<blockquote>
+
+<p>Clojure is pronounced exactly like closure, where the s/j has the zh
+sound as in azure, pleasure etc.
+The name was chosen to be unique. I wanted to involve c (c#), l (lisp)
+and j (java).
+Once I came up with Clojure, given the pun on closure, the available
+domains and vast emptiness of the googlespace, it was an easy
+decision.
+</p>
+<p>
+Rich
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-16" class="outline-1 slide">
+<h1 id="sec-16">Closure</h1>
+<div class="outline-text-1" id="text-16">
+
+
+<blockquote>
+
+<p>Sometimes it's called a closure, other times a saved lexical environment. Or, as some of us like to say, let over lambda. — Let Over Lambda, Doug Hoyte 
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-17" class="outline-1 slide">
+<h1 id="sec-17">Closure in Lisp</h1>
+<div class="outline-text-1" id="text-17">
+
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #5f8700;">let</span> ((x 0))
+    (<span style="color: #5f8700;">lambda</span> () x))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-18" class="outline-1 slide">
+<h1 id="sec-18">Closure in Clojure</h1>
+<div class="outline-text-1" id="text-18">
+
+
+
+
+<pre class="src src-clojure">(<span style="color: #5f8700;">let</span> [x 0]
+    (<span style="color: #0087ff;">fn</span> [] x))
+</pre>
+
+
+<pre class="example">
+;;=&gt; #&lt;user$eval333$fn__334 user$eval333$fn__334@5dc1eceb&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-19" class="outline-1 slide">
+<h1 id="sec-19">Closure in Javascript</h1>
+<div class="outline-text-1" id="text-19">
+
+
+
+
+<pre class="src src-js">(<span style="color: #5f8700;">function</span>() {
+  <span style="color: #5f8700;">var</span> <span style="color: #0087ff;">x</span> = 0;
+  <span style="color: #5f8700;">return</span> <span style="color: #5f8700;">function</span>() {
+    <span style="color: #5f8700;">return</span> x;
+  }
+})()
+</pre>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Function</td></tr>
+</tbody>
+</table>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-20" class="outline-1 slide">
+<h1 id="sec-20">Closure in ruby</h1>
+<div class="outline-text-1" id="text-20">
+
+
+
+
+
+<pre class="src src-ruby">lambda { x = 0 }
+</pre>
+
+
+<pre class="example">
+#&lt;Proc:0x000000010f94fad8@-:3&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-21" class="outline-1 slide">
+<h1 id="sec-21">Closures are fundamental</h1>
+<div class="outline-text-1" id="text-21">
+
+<p>Closures are the building blocks of lisp. Closures achieve and provide encapsulation of data and functionality in a single, logical unit.
+</p>
+<blockquote>
+
+<p>"Because of this, lisp programmers often don't think in terms of classes and objects. Once assignable value cells and good old lambda expressions are available, object systems are, at best, occasionally useful abstractions and, at worst, special-case and redundant. — Doug Hoyte, Let Over Lambda, Closure Oriented Programming
+</p>
+</blockquote>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-22" class="outline-1 slide">
+<h1 id="sec-22">Closures and OO</h1>
+<div class="outline-text-1" id="text-22">
+
+<blockquote>
+
+<p>"One of the conclusions that we reached was that the "object" need not be a primitive notion in a programming language; one can build objects and their behaviour from little more than assignable value cells and good old lambda expressions." — Guy Steele on the design of Scheme
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-23" class="outline-1 slide">
+<h1 id="sec-23">Closures and OO</h1>
+<div class="outline-text-1" id="text-23">
+
+<blockquote>
+
+<p>"There is a saying&ndash;attributed to Norman Adams&ndash;that "Objects are a poor man's closures." — Scheming  with  Objects, Ken Dickey
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-24" class="outline-1 slide">
+<h1 id="sec-24">Closures and OO</h1>
+<div class="outline-text-1" id="text-24">
+
+<blockquote>
+
+<p>"It's possible, for instance, to implement almost all of the design patterns in the Gang of Four book in terms of Lisp macros. Rather than implementing the pattern each time you use it, you just invoke the correct macro and get it for free." — David Chisnall
+</p>
+</blockquote>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-25" class="outline-1 slide">
+<h1 id="sec-25">Functional vs OO</h1>
+<div class="outline-text-1" id="text-25">
+
+<blockquote>
+
+<p>"Whereas an object-oriented mindset will foster the approach of defining an application domain as a set of nouns (classes), the functional mind will see the solution as the composition or verbs (functions). Though both programmers may in all likelihood generate equivalent results, the functional solution will be more succinct, understandable, and reusable."  — Michael Fogus, The Joy Clojure
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-26" class="outline-1 slide">
+<h1 id="sec-26">Clojure's motivation</h1>
+<div class="outline-text-1" id="text-26">
+
+<blockquote>
+
+<p>Clojure was born out of frustration provoked in large part by the complexities of concurrent programming, complicated by the weaknesses of object-oriented programming in facilitating it.
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-27" class="outline-1 slide">
+<h1 id="sec-27">Clojure innovates</h1>
+<div class="outline-text-1" id="text-27">
+
+
+<p>
+Simple Made Easy, Rich Hickey
+<a href="http://www.infoq.com/presentations/Simple-Made-Easy">http://www.infoq.com/presentations/Simple-Made-Easy</a>
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-28" class="outline-1 slide">
+<h1 id="sec-28">Clojure works</h1>
+<div class="outline-text-1" id="text-28">
+
+
+<p>
+Clojure in the Field, Stuart Halloway
+<a href="http://www.infoq.com/presentations/Clojure-in-the-Field">http://www.infoq.com/presentations/Clojure-in-the-Field</a>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-29" class="outline-1 slide">
+<h1 id="sec-29">Clojure is being adopted</h1>
+<div class="outline-text-1" id="text-29">
+
+
+<ul>
+<li>Who's using Clojure in production?
+</li>
+</ul>
+
+<p><a href="http://www.quora.com/Whos-using-Clojure-in-production">http://www.quora.com/Whos-using-Clojure-in-production</a>
+</p>
+<ul>
+<li>Which startups are using Clojure?
+</li>
+</ul>
+
+<p><a href="http://www.quora.com/Clojure/Which-startups-are-using-Clojure">http://www.quora.com/Clojure/Which-startups-are-using-Clojure</a>
+</p>
+<ul>
+<li>Clojure Success Stories
+</li>
+</ul>
+
+<p><a href="http://dev.clojure.org/display/community/Clojure+Success+Stories">http://dev.clojure.org/display/community/Clojure+Success+Stories</a>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-30" class="outline-1 slide">
+<h1 id="sec-30">The Lisp Curse</h1>
+<div class="outline-text-1" id="text-30">
+
+
+<p>
+The power of Lisp is its own worst enemy. — Rudolf Winestock
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-31" class="outline-1 slide">
+<h1 id="sec-31">Brilliant Bipolar Mind</h1>
+<div class="outline-text-1" id="text-31">
+
+
+<p>
+Lisp allows you to just chuck things off so easily, and it is easy to take this for granted.  I saw this 10 years ago when looking for a GUI to my Lisp (Garnet had just gone West then).  No problem, there were 9 different offerings.  The trouble was that none of the 9 were properly documented and none were bug free. Basically each person had implemented his own solution and it worked for him so that was fine. This is a BBM attitude; it works for me and I understand it. It is also the product of not needing or wanting anybody else's help to do something. — Dr Mark Tarver
+</p>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-32" class="outline-1 slide">
+<h1 id="sec-32">Technical issues vs Social issues</h1>
+<div class="outline-text-1" id="text-32">
+
+
+<p>
+Lisp is so powerful that problems which are technical issues in other programming languages are social issues in Lisp.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-33" class="outline-1 slide">
+<h1 id="sec-33">Lisp contributions</h1>
+<div class="outline-text-1" id="text-33">
+
+
+<p>
+Contributions to programming as we know it. A long list of ideas that originated with Lispers:
+</p>
+<ul>
+<li>garbage collection 
+</li>
+<li>tree data structures
+</li>
+<li>if-then-else structure
+</li>
+<li>dynamic typing
+</li>
+<li>homoiconicity
+</li>
+<li>metaprogramming
+</li>
+<li>self-hosting compilers
+</li>
+<li>interactive environment
+</li>
+<li>personal computing 
+</li>
+</ul>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-34" class="outline-1 slide">
+<h1 id="sec-34">My favorite quote</h1>
+<div class="outline-text-1" id="text-34">
+
+
+<p>
+"Lisp is worth learning for the profound enlightenment experience you will have when you finally get it; that experience will make you a better programmer for the rest of your days, even if you never actually use Lisp itself a lot." - Eric Raymond
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
