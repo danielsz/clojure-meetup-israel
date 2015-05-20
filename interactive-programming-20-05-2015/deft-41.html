@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Interactive programming with Boot</title>
+<meta name="author" content="(Daniel Szmulewicz)"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/2.6.2/css/reveal.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/2.6.2/css/theme/moon.css" id="theme"/>
+<link rel="stylesheet" href="http://gad.tuppu.net/css/tables.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/reveal.js/2.6.2/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Interactive programming with Boot</h1>
+<h2>Daniel Szmulewicz</h2>
+<h2><a href="mailto:"></a></h2>
+<h2></h2>
+</section>
+
+<section>
+<section id="slide-sec-1">
+<h2 id="sec-1">A history of interactive programming</h2>
+
+<div class="figure">
+<p><img src="http://ecx.images-amazon.com/images/I/51qjJtCFxiL.jpg" alt="51qjJtCFxiL.jpg" />
+</p>
+</div>
+
+</section>
+<section id="slide-sec-1-1">
+<h3 id="sec-1-1">A definition</h3>
+<p>
+Interactive programming is the procedure of writing parts of a program while it is already active.
+</p>
+
+</section>
+<section>
+
+<p>
+From within the environment provided by the REPL, you can define and redefine program elements such as variables, functions, classes, and methods; evaluate any Lisp expression; load files containing Lisp source code or compiled code; compile whole files or individual functions; enter the debugger; step through code; and inspect the state of individual Lisp objects.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-2">
+<h2 id="sec-2">Important questions we will not delve into</h2>
+<div class="outline-text-2" id="text-2">
+</div></section>
+<section id="slide-sec-2-1">
+<h3 id="sec-2-1">Why interactive programming?</h3>
+<ul>
+<li>bottom-up programming</li>
+<li>domain exploration</li>
+<li>bricolage and prototyping</li>
+<li>Bret Victor</li>
+<li>ideal fit for innovation, learning and teaching</li>
+
+</ul>
+</section>
+<section>
+<p>
+Seminal paper: <a href="http://www.papert.org/articles/EpistemologicalPluralism.html">Epistemological Pluralism and the Revaluation of the Concrete</a>, by Seymour Papert and Sherry Turkle
+</p>
+</section>
+<section id="slide-sec-2-2">
+<h3 id="sec-2-2">How do you build a story for interactive programming?</h3>
+<ul>
+<li>What properties must a programming language have to build a good story for interactive programming?</li>
+
+</ul>
+
+<p>
+Consult a paper (from 1978): <a href="http://www.ida.liu.se/ext/caisor/archive/1978/001/caisor-1978-001.pdf">Programming in an Interactive Environment: the ``Lisp'' Experience</a> by Erik Sandewall
+</p>
+</section>
+<section>
+
+<ul>
+<li>Bootstrapping</li>
+<li>Incrementality</li>
+<li>Procedure orientation</li>
+<li>Internal representation of programs</li>
+<li>Full checking capability</li>
+<li>Declaration-free kernel</li>
+<li>Data structures and database</li>
+<li>Defined I/O for data structure</li>
+<li>Handles and interactive control</li>
+
+</ul>
+
+</section>
+<section>
+
+<p>
+The kernel of the programming system must contain the following programs:
+</p>
+
+<ul>
+<li>a parser</li>
+<li>a program-printer</li>
+<li>an interpreter and/or</li>
+<li>a compiler</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-3">
+<h2 id="sec-3">The REPL</h2>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp">(loop (print (eval (read))))
+</pre>
+</div>
+</section>
+<section id="slide-sec-3-1">
+<h3 id="sec-3-1">Functionality of a Lisp REPL</h3>
+<ul>
+<li class="fragment roll-in">History of inputs and outputs.</li>
+<li class="fragment roll-in">Variables for last result, last error (*1, *e).</li>
+<li class="fragment roll-in">Help and documentation for commands. (<code>doc</code>, <code>source</code> in clojure.repl namespace)</li>
+<li class="fragment roll-in">Variables to control the reader. (<code>*data-readers*</code>, <code>*default-data-reader-fn*</code>)</li>
+<li class="fragment roll-in">Variables to control the printer. (<code>*print-length*</code>, <code>*print-level*</code>)</li>
+
+</ul>
+</section>
+<section id="slide-sec-3-2">
+<h3 id="sec-3-2">How is a Lisp REPL different from any other REPL?</h3>
+<ul>
+<li>SO: <a href="http://stackoverflow.com/questions/5671214/is-lisp-the-only-language-with-repl">Is Lisp the only language with REPL?</a></li>
+<li>Clearly not: <a href="http://repl.it/">http://repl.it/</a></li>
+<li>Yet, Lisp’s story for interactive programming is unparalleled.</li>
+
+</ul>
+
+</section>
+<section id="slide-sec-3-3">
+<h3 id="sec-3-3">A REPL is not enough</h3>
+<blockquote nil>
+<p>
+But for the true Lisp programming experience, you need an environment, such as SLIME, that lets you interact with Lisp both via the REPL and while editing source files. — <b>Peter Seibel</b>, Practical Common Lisp
+</p>
+</blockquote>
+</section>
+<section>
+<blockquote nil>
+<p>
+For instance, you don't want to have to cut and paste a function definition from a source file to the REPL or have to load a whole file just because you changed one function; your Lisp environment should let us evaluate or compile both individual expressions and whole files directly from your editor. — <b>Peter Seibel</b>, Practical Common Lisp
+</p>
+</blockquote>
+</section>
+</section>
+<section>
+<section id="slide-sec-4">
+<h2 id="sec-4">The environment</h2>
+<div class="outline-text-2" id="text-4">
+</div></section>
+<section id="slide-sec-4-1">
+<h3 id="sec-4-1">Types of environments</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Lisp</th>
+<th scope="col" class="left">Non-Lisp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">SLIME  (CL)</td>
+<td class="left">COLT (Actionscript)</td>
+</tr>
+
+<tr>
+<td class="left">Cider (Clojure</td>
+<td class="left">SuperCollider (C++)</td>
+</tr>
+
+<tr>
+<td class="left">Emacs (Lisp)</td>
+<td class="left">Squeak (Smalltalk)</td>
+</tr>
+
+<tr>
+<td class="left">Geiser (Scheme)</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Genera (Lisp Machine)</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slide-sec-4-2">
+<h3 id="sec-4-2">The ultimate interactive session</h3>
+<iframe width="420" height="315" src="https://www.youtube.com/embed/_B_4vhsmRRI" frameborder="0" allowfullscreen></iframe>
+</section>
+<section id="slide-sec-4-3">
+<h3 id="sec-4-3">GUIs and interactive environments</h3>
+
+<div class="figure">
+<p><img src="http://upload.wikimedia.org/wikipedia/en/d/d2/Symbolics-document-examiner.png" alt="Symbolics-document-examiner.png" />
+</p>
+</div>
+</section>
+<section id="slide-sec-4-4">
+<h3 id="sec-4-4">Live coding</h3>
+<p>
+Live coding performance in Impromptu by Andrew Sorensen.
+</p>
+
+<iframe width="420" height="315" src="https://www.youtube.com/embed/b-8Cmd6k4_M" frameborder="0" allowfullscreen></iframe>
+</section>
+<section id="slide-sec-4-5">
+<h3 id="sec-4-5">A REPL Everywhere</h3>
+<p>
+Full Clojure programming environment in Microsoft Excel
+<a href="https://github.com/whamtet/Excel-REPL">https://github.com/whamtet/Excel-REPL</a>
+</p>
+</section>
+</section>
+<section>
+<section id="slide-sec-5">
+<h2 id="sec-5">Cider</h2>
+<p>
+Henceforth, the environment will be known as Cider.
+</p>
+</section>
+<section id="slide-sec-5-1">
+<h3 id="sec-5-1">Restarting the environment</h3>
+<p>
+You don’t want to do that.
+</p>
+</section>
+<section id="slide-sec-5-2">
+<h3 id="sec-5-2">Restarting the application</h3>
+<p>
+Ah. Let’s see.
+</p>
+</section>
+<section id="slide-sec-5-3">
+<h3 id="sec-5-3">The Reloaded pattern</h3>
+<p>
+Reloaded components (Stuart Sierra) 
+</p>
+</section>
+<section id="slide-sec-5-4">
+<h3 id="sec-5-4">system</h3>
+<p>
+A set of readymade components. The usual suspects.
+</p>
+<ul>
+<li>Jetty</li>
+<li>HTTP kit</li>
+<li>Aleph</li>
+<li>Datomic</li>
+<li>H2</li>
+<li>Monger</li>
+<li>Sente</li>
+<li>nREPL</li>
+
+</ul>
+
+</section>
+<section id="slide-sec-5-5">
+<h3 id="sec-5-5">Leiningen</h3>
+<p>
+Not unusual to have three JVM instances side by side: leiningen, the repl, and figwheel, for example.
+Taxes memory on development machine.
+</p>
+</section>
+<section id="slide-sec-5-6">
+<h3 id="sec-5-6">Boot</h3>
+<p>
+Solves that. 
+</p>
+</section>
+<section id="slide-sec-5-7">
+<h3 id="sec-5-7">Boot-system</h3>
+<p>
+The real deal.
+</p>
+</section>
+<section>
+<p>
+<a href="https://github.com/danielsz/system#boot-system">https://github.com/danielsz/system#boot-system</a>
+</p>
+</section>
+</section>
+<section>
+<section id="slide-sec-6">
+<h2 id="sec-6">That’s it</h2>
+<aside class="notes">
+<ul class="org-ul">
+<li>(Levels of REPLs.)
+</li>
+<li>(Restarts and error handling) In case of an error one gets just another REPL, with added debug commands, in the context of the error. 
+</li>
+</ul>
+
+</aside>
+</section>
+</section>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/head.min.js"></script>
+<script src="https://cdn.jsdelivr.net/reveal.js/2.6.2/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
